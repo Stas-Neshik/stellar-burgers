@@ -1,21 +1,16 @@
-import { getUserApi } from '@api';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { TUser } from '@utils-types';
 
-export interface TUserState {
+interface IAuthUserState {
+  userData: TUser | null;
   isAuthChecked: boolean;
-  data: null;
-  requestStaatus: boolean;
+  requestLoginUser: boolean;
+  registerError?: string;
+  loginError?: string;
+  updateError?: string;
 }
 
-const initialState: TUserState = {
+const initialState: IAuthUserState = {
+  userData: null,
   isAuthChecked: false,
-  data: null,
-  requestStaatus: false
+  requestLoginUser: false
 };
-
-const UserSlice = createSlice({
-  name: 'user',
-  initialState,
-  reducers: {}
-});
-// export const UserSlice = createSlice({});

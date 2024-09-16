@@ -19,7 +19,7 @@ export const loadIngredients = createAsyncThunk(
 
 const IngredientsSlice = createSlice({
   name: 'burgerIngredients',
-  initialState: initialState,
+  initialState,
   reducers: {},
   selectors: {
     addAllIngredients: (state) => state.ingridients,

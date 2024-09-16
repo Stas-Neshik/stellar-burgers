@@ -10,8 +10,9 @@ import {
 } from '../../services/slices/ingridients';
 
 export const BurgerIngredients: FC = () => {
-  /** TODO: взять переменные из стора */
   const burgerIngridients = useSelector(addAllIngredients);
+  console.log(burgerIngridients);
+
   const burgerIngridientsError = useSelector(ingredientsError);
 
   const buns = burgerIngridients.filter(
@@ -23,8 +24,6 @@ export const BurgerIngredients: FC = () => {
   const sauces = burgerIngridients.filter(
     (ingridient) => ingridient.type === 'sauce'
   );
-
-  console.log(burgerIngridientsError);
 
   const [currentTab, setCurrentTab] = useState<TTabMode>('bun');
   const titleBunRef = useRef<HTMLHeadingElement>(null);
