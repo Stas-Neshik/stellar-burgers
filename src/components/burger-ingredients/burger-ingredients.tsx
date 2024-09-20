@@ -11,7 +11,6 @@ import {
 
 export const BurgerIngredients: FC = () => {
   const burgerIngridients = useSelector(addAllIngredients);
-  console.log(burgerIngridients);
 
   const burgerIngridientsError = useSelector(ingredientsError);
 

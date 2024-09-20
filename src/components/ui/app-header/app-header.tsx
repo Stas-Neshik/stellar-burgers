@@ -52,9 +52,16 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
         )}
       >
         <ProfileIcon type={'primary'} />
-        <p className='text text_type_main-default ml-2'>
+        <NavLink
+          className={clsx(
+            'text text_type_main-default ml-2',
+            styles.link,
+            styles.link_active
+          )}
+          to={'profile'}
+        >
           {userName || 'Личный кабинет'}
-        </p>
+        </NavLink>
       </div>
     </nav>
   </header>

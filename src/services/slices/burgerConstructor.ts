@@ -3,60 +3,63 @@ import { TConstructorIngredient, TIngredient } from '@utils-types';
 
 type TConstructor = {
   bun: TConstructorIngredient | null;
-  ingridients: TConstructorIngredient[];
+  ingredients: TConstructorIngredient[];
 };
 
 const initialState: TConstructor = {
   bun: null,
-  ingridients: []
+  ingredients: []
 };
 
 export const burgerConstructorSlice = createSlice({
   name: 'burgerConstructor',
   initialState: initialState,
   reducers: {
-    addIngridient: {
+    addIngredient: {
       reducer: (
         state: TConstructor,
         action: PayloadAction<TConstructorIngredient>
       ) => {
-        if (state.bun?.type === 'bun') {
+        if (action.payload.type === 'bun') {
           state.bun = action.payload;
         } else {
-          state.ingridients.push(action.payload);
+          state.ingredients.push(action.payload);
         }
       },
-      prepare: (ingredient: TIngredient) => {
-        return { payload: { ...ingredient, id: nanoid() } };
-      }
+      prepare: (ingredient: TIngredient) => ({
+        payload: {
+          ...ingredient,
+          id: nanoid()
+        }
+      })
     },
-    removeIngridient: (state, action) => {
-      state.ingridients = state.ingridients.filter((ingredient) => {
+    removeIngredient: (state, action) => {
+      state.ingredients = state.ingredients.filter((ingredient) => {
         ingredient.id != action.payload;
       });
     },
-    clearIngridients: (state) => {
-      state.ingridients = [];
+    clearIngredients: (state) => {
+      state.ingredients = [];
       state.bun = null;
     },
-    changeIngridient: (state, action) => {
-      const element = state.ingridients[action.payload.initialIndex];
-      state.ingridients[action.payload.initialIndex] =
-        state.ingridients[action.payload.finishIndex];
-      state.ingridients[action.payload.finishIndex] = element;
+    changeIngredient: (state, action) => {
+      const element = state.ingredients[action.payload.initialIndex];
+      state.ingredients[action.payload.initialIndex] =
+        state.ingredients[action.payload.finishIndex];
+      state.ingredients[action.payload.finishIndex] = element;
     }
   },
   selectors: {
-    getIngridients: (state) => state
+    getIngredients: (state) => state
   }
 });
 
 export const constructorReducer = burgerConstructorSlice.reducer;
 export const constructorName = burgerConstructorSlice.name;
-export const { getIngridients } = burgerConstructorSlice.selectors;
+export const { getIngredients } = burgerConstructorSlice.selectors;
 export const {
-  addIngridient,
-  removeIngridient,
-  clearIngridients,
-  changeIngridient
+  addIngredient,
+  removeIngredient,
+  clearIngredients,
+  changeIngredient
 } = burgerConstructorSlice.actions;

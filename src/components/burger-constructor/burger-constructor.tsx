@@ -2,19 +2,18 @@ import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useSelector, useDispatch } from '../../services/store/store';
-import { getIngridients } from '../../services/slices/burgerConstructor';
+import { getIngredients } from '../../services/slices/burgerConstructor';
 import {
-  getorderRequest,
+  getOrderRequest,
   getOrder,
   clearInfo
 } from '../../services/slices/order';
 
 export const BurgerConstructor: FC = () => {
-  /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const dispatch = useDispatch();
-  const constructorItems = useSelector(getIngridients);
+  const constructorItems = useSelector(getIngredients);
 
-  const orderRequest = useSelector(getorderRequest);
+  const orderRequest = useSelector(getOrderRequest);
 
   const orderModalData = useSelector(getOrder);
 
@@ -29,7 +28,7 @@ export const BurgerConstructor: FC = () => {
   const price = useMemo(
     () =>
       (constructorItems.bun ? constructorItems.bun.price * 2 : 0) +
-      constructorItems.ingridients.reduce(
+      constructorItems.ingredients.reduce(
         (s: number, v: TConstructorIngredient) => s + v.price,
         0
       ),

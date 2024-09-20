@@ -47,6 +47,7 @@ module.exports = {
       }
     ]
   },
+devtool: 'eval-source-map',
   plugins: [
     new ESLintPlugin({
       extensions: ['.js', '.jsx', '.ts', '.tsx']

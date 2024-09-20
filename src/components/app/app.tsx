@@ -13,11 +13,12 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import { useDispatch } from '../../services/store/store';
+import { useDispatch, useSelector } from '../../services/store/store';
 import { useEffect } from 'react';
 import { loadIngredients } from '../../services/slices/ingridients';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route/protected-route';
+import { userAuth, UserChecked } from '../../services/slices/user';
 
 // на стрелочную ругается prettier
 function App() {
@@ -35,10 +36,11 @@ const RouteComponent = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const backgroundLocation = location.state?.background;
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(loadIngredients());
+    dispatch(userAuth());
   }, []);
 
   return (
@@ -51,7 +53,6 @@ const RouteComponent = () => {
         <Route
           path='/login'
           element={
-            // TO DO ProtectedRoute:
             <ProtectedRoute onlyUnAuth>
               <Login />
             </ProtectedRoute>
@@ -60,7 +61,6 @@ const RouteComponent = () => {
         <Route
           path='/register'
           element={
-            // TO DO ProtectedRoute:
             <ProtectedRoute onlyUnAuth>
               <Register />
             </ProtectedRoute>
@@ -69,7 +69,6 @@ const RouteComponent = () => {
         <Route
           path='/forgot-password'
           element={
-            // TO DO ProtectedRoute:
             <ProtectedRoute onlyUnAuth>
               <ForgotPassword />
             </ProtectedRoute>
@@ -78,7 +77,6 @@ const RouteComponent = () => {
         <Route
           path='/reset-password'
           element={
-            // TO DO ProtectedRoute:
             <ProtectedRoute onlyUnAuth>
               <ResetPassword />
             </ProtectedRoute>
@@ -87,7 +85,6 @@ const RouteComponent = () => {
         <Route
           path='/profile'
           element={
-            // TO DO ProtectedRoute:
             <ProtectedRoute onlyUnAuth>
               <Profile />
             </ProtectedRoute>
@@ -96,7 +93,6 @@ const RouteComponent = () => {
         <Route
           path='/profile/orders'
           element={
-            // TO DO ProtectedRoute:
             <ProtectedRoute onlyUnAuth>
               <ProfileOrders />
             </ProtectedRoute>
