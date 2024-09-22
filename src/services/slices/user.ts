@@ -30,15 +30,14 @@ const initialState: IAuthUserState = {
 };
 
 export const registerUser = createAsyncThunk(
-  'user/registerUser',
+  'authUser/registerUser',
   async (userData: TRegisterData, { rejectWithValue }) => {
     const response = await registerUserApi(userData);
 
     if (!response?.success) {
-      return rejectWithValue(response);
+      return rejectWithValue(null);
     }
-    setCookie('accessToken', response.accessToken);
-    localStorage.setItem('refreshToken', response.refreshToken);
+
     return response.user;
   }
 );
@@ -150,6 +149,8 @@ export const userSlice = createSlice({
         state.requestLoginUser = false;
       })
       .addCase(logout.pending, (state) => {
+        console.log('444');
+
         state.requestLoginUser = true;
       })
       .addCase(logout.fulfilled, (state) => {
