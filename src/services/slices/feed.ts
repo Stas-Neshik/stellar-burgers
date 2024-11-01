@@ -1,4 +1,4 @@
-import { getFeedsApi } from '@api';
+import { getFeedsApi } from '../../utils/burger-api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 
@@ -6,12 +6,14 @@ type TFeed = {
   orders: TOrder[];
   total: number;
   totalToday: number;
+  error?: string | null;
 };
 
-const initialState: TFeed = {
+export const initialState: TFeed = {
   orders: [],
   total: 0,
-  totalToday: 0
+  totalToday: 0,
+  error: null
 };
 
 export const loadFeed = createAsyncThunk('getFeed', async () => getFeedsApi());
@@ -36,8 +38,8 @@ const feedSlice = createSlice({
           (state.total = action.payload.total),
           (state.totalToday = action.payload.totalToday);
       })
-      .addCase(loadFeed.rejected, () => {
-        console.log('Сработал loadFeed.rejected');
+      .addCase(loadFeed.rejected, (state) => {
+        state.error = 'Ошибка в получении заказа';
       });
   }
 });

@@ -1,4 +1,4 @@
-import { getOrderByNumberApi, orderBurgerApi } from '@api';
+import { getOrderByNumberApi, orderBurgerApi } from '../../utils/burger-api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 import { RequestStatus } from 'src/types';
@@ -35,25 +35,25 @@ export const orderSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getOrderByNumber.pending, () => {
-        console.log('Сработал getOrderByNumber.pending');
+      .addCase(getOrderByNumber.pending, (state) => {
+        state.loading = true;
       })
       .addCase(getOrderByNumber.fulfilled, (state, action) => {
         state.order = action.payload.orders[0];
         state.loading = false;
       })
-      .addCase(getOrderByNumber.rejected, () => {
-        console.log('Сработал getOrderByNumber.rejected');
+      .addCase(getOrderByNumber.rejected, (state) => {
+        state.loading = false;
       })
-      .addCase(createOrder.pending, () => {
-        console.log('Сработал createOrder.pending');
+      .addCase(createOrder.pending, (state) => {
+        state.loading = true;
       })
       .addCase(createOrder.fulfilled, (state, action) => {
         state.order = action.payload.order;
         state.loading = false;
       })
-      .addCase(createOrder.rejected, () => {
-        console.log('Сработал createOrder.rejected');
+      .addCase(createOrder.rejected, (state) => {
+        state.loading = false;
       });
   }
 });

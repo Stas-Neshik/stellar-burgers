@@ -1,14 +1,14 @@
-import { getIngredientsApi } from '@api';
+import { getIngredientsApi } from '../../utils/burger-api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TIngredient } from '@utils-types';
 
-interface IIngredientsState {
-  ingridients: TIngredient[];
+export interface IIngredientsState {
+  ingredients: TIngredient[];
   loading: boolean;
   error?: string | null;
 }
-const initialState: IIngredientsState = {
-  ingridients: [],
+export const initialState: IIngredientsState = {
+  ingredients: [],
   loading: true
 };
 
@@ -22,7 +22,7 @@ const IngredientsSlice = createSlice({
   initialState,
   reducers: {},
   selectors: {
-    addAllIngredients: (state) => state.ingridients,
+    addAllIngredients: (state) => state.ingredients,
     getIsLoading: (state) => state.loading,
     ingredientsError: (state) => state.error
   },
@@ -33,7 +33,7 @@ const IngredientsSlice = createSlice({
         state.error = null;
       })
       .addCase(loadIngredients.fulfilled, (state, action) => {
-        state.ingridients = action.payload;
+        state.ingredients = action.payload;
         state.loading = false;
       })
       .addCase(loadIngredients.rejected, (state) => {

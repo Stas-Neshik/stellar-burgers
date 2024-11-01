@@ -9,7 +9,7 @@ export const IngredientDetails: FC = () => {
   const { id } = useParams();
 
   const ingredientData = useSelector(addAllIngredients).find(
-    (ingridient) => ingridient._id === id
+    (ingredient) => ingredient._id === id
   );
 
   if (!ingredientData) {

@@ -10,18 +10,18 @@ import {
 } from '../../services/slices/ingridients';
 
 export const BurgerIngredients: FC = () => {
-  const burgerIngridients = useSelector(addAllIngredients);
+  const burgerIngredients = useSelector(addAllIngredients);
 
-  const burgerIngridientsError = useSelector(ingredientsError);
+  const burgerIngredientsError = useSelector(ingredientsError);
 
-  const buns = burgerIngridients.filter(
-    (ingridient) => ingridient.type === 'bun'
+  const buns = burgerIngredients.filter(
+    (ingredient) => ingredient.type === 'bun'
   );
-  const mains = burgerIngridients.filter(
-    (ingridient) => ingridient.type === 'main'
+  const mains = burgerIngredients.filter(
+    (ingredient) => ingredient.type === 'main'
   );
-  const sauces = burgerIngridients.filter(
-    (ingridient) => ingridient.type === 'sauce'
+  const sauces = burgerIngredients.filter(
+    (ingredient) => ingredient.type === 'sauce'
   );
 
   const [currentTab, setCurrentTab] = useState<TTabMode>('bun');
@@ -63,7 +63,7 @@ export const BurgerIngredients: FC = () => {
 
   return (
     <>
-      {burgerIngridientsError ? (
+      {burgerIngredientsError ? (
         <div>Опа</div>
       ) : (
         <BurgerIngredientsUI
