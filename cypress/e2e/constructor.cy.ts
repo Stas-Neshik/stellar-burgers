@@ -6,8 +6,6 @@ const sauce = '[data-ingredient="sauce"]';
 const modals = '#modals';
 
 describe('Тестирование конструктора', () => {
-
-
   beforeEach(() => {
     cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients' });
     cy.visit('/');
@@ -42,7 +40,6 @@ describe('Тестирование конструктора', () => {
     });
   });
 
-
   describe('тестирование создания заказа', () => {
     beforeEach(() => {
   
@@ -66,7 +63,6 @@ describe('Тестирование конструктора', () => {
     });
 
     afterEach(() => {
-   
       cy.clearCookie('accessToken');
       localStorage.removeItem('refreshToken');
     });
