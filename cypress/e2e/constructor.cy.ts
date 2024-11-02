@@ -49,10 +49,21 @@ describe('Тестирование конструктора', () => {
     });
 
     it('тестирование оформления заказа', () => {
-      cy.get('[data-ingredient="bun"]:first-of-type button').click();
       cy.get('[data-ingredient="bun"]').contains('Добавить').click();
+      cy.get('[data-ingredient="main"]').contains('Добавить').click();
+      cy.get('[data-order-button]').click();
+      cy.get('#modals').children().should('have.length', 2);
+      cy.get('#modals h2:first-of-type').should(
+        'have.text',
+        orderFake.order.number
+      );
     });
- 
+
+    afterEach(() => {
+   
+      cy.clearCookie('accessToken');
+      localStorage.removeItem('refreshToken');
+    });
   });
 });
 
